@@ -1,219 +1,195 @@
-public class Pokemon {
-    private String pokemonName;
-    private String pokemonType;
-    private int pokemonHP;
-    private int pokemonMaxHP;
-    private int pokemonAP; 
-    private int pokemonPP; 
-    private int pokemonSleepPoint;
-    private int pokemonMaxSleepPoint;
-    private int pokemonHungryPoint;
-    private int pokemonMaxHungryPoint;
-    private double pokemonExp;
-    private double pokemonMaxExpPerLevel;
-    private int pokemonLevel;
-    private int deathCount;
-    private int tmpHP;
-    private double tmpMaxExp;
-    private int tmpAP;
+public abstract class Pokemon{
+    protected String name; 
+    protected int hp;
+    protected int sp;
+    protected int Maxhp;
+    protected int Maxsp;
 
-    public Pokemon() {
-        pokemonName = "";
-        pokemonType = "";
-        pokemonHP = randomInt(50, 70);
-        pokemonMaxHP = pokemonHP;
-        pokemonAP = randomInt(20, 40);
-        pokemonSleepPoint = 100; 
-        pokemonMaxSleepPoint = pokemonSleepPoint;
-        pokemonHungryPoint = 100; 
-        pokemonMaxHungryPoint = pokemonHungryPoint;
-        pokemonExp = 0.0;
-        pokemonMaxExpPerLevel = 50.0;
-        pokemonLevel = 1;
-        deathCount = 0;
-        tmpHP = pokemonHP;
-        tmpMaxExp = pokemonMaxExpPerLevel;
-        tmpAP = pokemonAP;
+    protected boolean paralayze = false;
+    protected boolean poison = false;
+    protected String type;
+    protected int unit;
+    
+    Skill skill1 = new Skill();
+    Skill skill2 = new Skill();
+    Skill skill3 = new Skill();
+    Skill skill4 = new Skill();
+
+    public Pokemon(String name, int Maxhp, int Maxsp, String type, int unit){
+        this.name = name;
+        this.hp = (int)((Math.random()*Maxhp)+50);
+        this.sp = Maxsp;
+        this.Maxhp = hp;
+        this.Maxsp = Maxsp;
+        this.type = type;
+        this.unit = unit;
     }
 
-    public void setName(String _pokemonName) {
-        pokemonName = _pokemonName;
+    public String getName(){
+        return name;
     }
 
-    public void setType(int numType) {
-        if (numType == 1) {
-            pokemonType = "Normal";
-        } else if (numType == 2) {
-            pokemonType = "Fire";
-        } else if (numType == 3) {
-            pokemonType = "Water";
-        } else if (numType == 4) {
-            pokemonType = "Grass";
-        } else if (numType == 5) {
-            pokemonType = "Electric";
-        } else if (numType == 6) {
-            pokemonType = "Poison";
+    public int getHp(){
+        return hp;
+    }
+    public int getSp(){
+        return sp;
+    }
+    public String gettype(){
+        return type;
+    }
+    public int MaxHP(){
+        return Maxhp;
+    }
+    public int MaxSP(){
+        return Maxsp;
+    }
+
+    public int getunit(){
+        return unit;
+    }
+
+    public String toString(){
+        return name;
+    }
+
+    public abstract void attack(Pokemon enemy,int dmg);
+    public abstract void reduce(Pokemon mypokemon,int value);
+    public abstract int AdditonalDmg(Pokemon enemy, int dmg);
+
+    public void damage(int value){
+        int currentHP = hp - value;
+        if(paralayze != true){
+            if(currentHP >= 0){
+                this.hp = currentHP;
+            }
+            else{
+                this.hp = 0;
+            }
+        }
+        else{
+            System.out.println("Can't Attack because Paralayzed");
         }
     }
 
-    public void earnExp(double monsterExp) {
-        if ((pokemonExp + monsterExp) >= pokemonMaxExpPerLevel) {
-            pokemonExp = (pokemonExp + monsterExp) - pokemonMaxExpPerLevel;
-            levelUp();
-        } else {
-            pokemonExp += monsterExp;
-        }
-    }
-
-    public void levelUp() {
-        pokemonLevel += 1;
-        pokemonMaxExpPerLevel = tmpMaxExp * pokemonLevel;
-        pokemonMaxHP = tmpHP * pokemonLevel;
-        pokemonAP = tmpAP * pokemonLevel;
-    }
-
-    public void lossExp(double value){
-        if ((pokemonExp - value) > 0.0 ) {
-            pokemonExp -= value;
-        } else {
-            pokemonExp = 0.0;
-        }
-    }
-
-    public void getDamage(int monsterAP) {
-        if ((pokemonHP - monsterAP) > 0) {
-            pokemonHP -= monsterAP;
-        } else {
-            pokemonHP = 0;
-            deathCount++;
-        }
-    }
-
-    public boolean isDie() {
-        if (pokemonHP <= 0)
-            return true;
+    public void reduceSP(int value){
+        int currentSP = sp - value;
+        if(currentSP >= 0)
+            this.sp = currentSP;
         else
-            return false;
+            this.sp = 0;
     }
 
-    public void curePokemon() {
-        pokemonHP = pokemonMaxHP;
-    }
-
-    public void regenHealth(int value) {
-        // add more
-        if ((pokemonHP + value) >= pokemonMaxHP && (value != -1)) {
-            pokemonHP = pokemonMaxHP;
-        } else if (value == -1) {       
-            pokemonHP = pokemonMaxHP;
-        } else {
-            pokemonHP += value;
+    public void heal(int value){
+        if((this.hp + value) > Maxhp){
+            this.hp = Maxhp;
         }
+        else
+            this.hp += value;
     }
 
-    public void lossSleepPoint(int value) {
-        if ((pokemonSleepPoint - value) <= 0) {
-            pokemonSleepPoint = 0;
+    public void sp(int value){
+        if((this.sp + value) > Maxsp){
+            this.sp = Maxsp;
         }
-        else {
-            pokemonSleepPoint -= value;
-        }
+        else
+            this.sp += value;
     }
 
-    public void lossHugryPoint(int value) {
-        if ((pokemonHungryPoint - value) <= 0) {
-            pokemonHungryPoint = 0;
-        }
-        else {
-            pokemonHungryPoint -= value;
-        }
+   
+
+    public void selectSkill(){
+        // System.out.println("\n\n\nSelect Frist Skill for Pokemon");
+        // skill1.select(type);
+        // System.out.println("\n");
+        // System.out.println("Select Second Skill for Pokemon");
+        // skill2.select(type);
+        // System.out.println("\n");
+        // System.out.println("Select Third Skill for Pokemon");
+        // skill3.select(type);
+        // System.out.println("\n");
+        // System.out.println("Select Forth Skill for Pokemon");
+        // skill4.select(type);
     }
 
-    public void eatBerry(int valueHp , int valueHgP) {
-        if ((pokemonHP + valueHp) >= pokemonMaxHP) {
-            pokemonHP = pokemonMaxHP;
-        } else {
-            pokemonHP += valueHp;
-        }
-        if ((pokemonHungryPoint + valueHgP) >= pokemonMaxHungryPoint) {
-            pokemonHungryPoint = pokemonMaxHungryPoint;
-        } else {
-            pokemonHungryPoint += valueHgP;
-        }
+    public void selectSkillGUI(int numskill, int numskill2 , int numskill3, int numskill4){
+        
+        skill1.select(type, numskill);
+        skill2.select(type, numskill2);
+        skill3.select(type, numskill3);
+        skill4.select(type, numskill4);
+        System.out.println(skill1.getname());
+        System.out.println(skill2.getname());
+        System.out.println(skill3.getname());
+        System.out.println(skill4.getname());
     }
 
-    public void sleep() {
-        pokemonSleepPoint = pokemonMaxSleepPoint;
-        lossHugryPoint(20);
-        regenHealth(-1);        
+    public void randomskill(){
+        skill1.random(type);
+        skill2.random(type);
+        skill3.random(type);
+        skill4.random(type);
+    }
+    
+    public String getskillGUI(int num){
+        if(num == 1)
+            return "1. "+skill1.getname()+"  DMG :  "+skill1.getDmg()+"  SP :  "+skill1.getCost();
+        else if(num == 2)
+            return "2. "+skill2.getname()+"  DMG : "+skill2.getDmg()+"  SP :  "+skill2.getCost();
+        else if(num == 3)
+            return "3. "+skill3.getname()+"  DMG : "+skill3.getDmg()+"  SP :  "+skill3.getCost();
+        else if(num == 4)
+            return "4. "+skill4.getname()+"  DMG : "+skill4.getDmg()+"  SP :  "+skill4.getCost();
+        return "";
     }
 
-
-    public String getName() {
-        return pokemonName;
+    public String getskillnameGUI(int num){
+        if(num == 1)
+            return ""+skill1.getname()+" (DMG :  "+skill1.getDmg() + ")";
+        else if(num == 2)
+            return ""+skill2.getname()+" (DMG : "+skill2.getDmg() + ")";
+        else if(num == 3)
+            return ""+skill3.getname()+" (DMG : "+skill3.getDmg() + ")";
+        else if(num == 4)
+            return ""+skill4.getname()+" (DMG : "+skill4.getDmg() + ")";
+        return "";
     }
 
-    public String getType() {
-        return pokemonType;
+    public void getskill(){
+        System.out.println("1. "+skill1.getname()+" DMG : "+skill1.getDmg()+" SP: "+skill1.getCost());  
+        System.out.println("2. "+skill2.getname()+" DMG : "+skill2.getDmg()+" SP: "+skill2.getCost()); 
+        System.out.println("3. "+skill3.getname()+" DMG : "+skill3.getDmg()+" SP: "+skill3.getCost()); 
+        System.out.println("4. "+skill4.getname()+" DMG : "+skill4.getDmg()+" SP: "+skill4.getCost()); 
     }
 
-    public int getHP() {
-        return pokemonHP;
+    
+
+    public void rename(String name){
+        this.name = name;
     }
 
-    public int getMaxHP() {
-        return pokemonMaxHP;
+    public int getdmg(int num){
+        if(num == 1)
+            return skill1.getDmg();
+        else if(num == 2)
+            return skill2.getDmg();
+        else if(num == 3)
+            return skill3.getDmg();
+        else if(num == 4)
+            return skill4.getDmg();
+        return 0;   
     }
 
-    public int getAP() {
-        return pokemonAP;
+    public int getsp(int num){
+        if(num == 1)
+            return skill1.getCost();
+        else if(num == 2)
+            return skill2.getCost();
+        else if(num == 3)
+            return skill3.getCost();
+        else if(num == 4)
+            return skill4.getCost();
+        return 0;   
     }
-
-    public int getPP() {
-        return pokemonPP;
-    }
-
-    public int getSleepPoint() {
-        return pokemonSleepPoint;
-    }
-
-    public int getMaxSleepingPoint() {
-        return pokemonMaxSleepPoint;
-    }
-
-    public int getHungryPoint() {
-        return pokemonHungryPoint;
-    }
-
-    public int getMaxHungryPoint() {
-        return pokemonMaxHungryPoint;
-    }
-
-    public int getLevel() {
-        return pokemonLevel;
-    }
-
-    public double getExp() {
-        return pokemonExp;
-    }
-
-    public double getMaxExpPerLevel() {
-        return pokemonMaxExpPerLevel;
-    }
-
-    public int getDeathCount() {
-        return deathCount;
-    }
-
-    private int randomInt(int min, int max) {
-        int randNum = 0;
-        randNum = (int) (Math.random() * ((max - min) + 1)) + min;
-        return randNum;
-    }
-
-    private static double randomDouble(int min, int max) {
-        double randNum = 0;
-        randNum = (double) Math.random() * ((max - min) + 1) + min;
-        return randNum;
-    }
-}
+    
+} 
