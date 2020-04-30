@@ -18,7 +18,7 @@ public class SelectskillCatchGUI extends JFrame{
         setVisible(true);
 
         Container c = getContentPane();
-        ImageIcon background = new ImageIcon("skill.png");
+        ImageIcon background = new ImageIcon("selectskill.png");
         ImageIcon BTcomfirm = new ImageIcon("BTcomfirm.png");
         JLabel pic = new JLabel(background);
         c.add(pic);

@@ -15,7 +15,7 @@ public class RewardGUI extends JFrame{
         setVisible(true);
         
         Container c = getContentPane();
-        ImageIcon img = new ImageIcon("gotitem.png");
+        ImageIcon img = new ImageIcon("getitem.png");
         ImageIcon BTcatch = new ImageIcon("BTcatch.png");
         ImageIcon BTdcatch = new ImageIcon("BTdcatch.png");
 

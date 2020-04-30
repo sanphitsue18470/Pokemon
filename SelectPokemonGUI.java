@@ -17,7 +17,7 @@ public class SelectPokemonGUI extends JFrame{
         setVisible(true);
 
         Container c = getContentPane();
-        ImageIcon img = new ImageIcon("fight.png"); 
+        ImageIcon img = new ImageIcon("selectfight.png"); 
         ImageIcon BTBackPotion = new ImageIcon("BTBackPotion.png");
         JLabel pic = new JLabel(img);
         c.add(pic);

@@ -14,7 +14,7 @@ public class bagGUI extends JFrame{
         setVisible(true);
 
         Container c = getContentPane();
-        ImageIcon img = new ImageIcon("inbag.png");
+        ImageIcon img = new ImageIcon("back1.png");
         ImageIcon BTBackPotion = new ImageIcon("BTBackPotion.png");
         JLabel pic = new JLabel(img);
         c.add(pic);

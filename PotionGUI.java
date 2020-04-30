@@ -13,7 +13,7 @@ public class PotionGUI extends JFrame{
         setVisible(true);
         
         Container c = getContentPane();
-        ImageIcon img = new ImageIcon("potionbag.png");
+        ImageIcon img = new ImageIcon("berrybag.png");
         ImageIcon BTuseBG = new ImageIcon("BTuseBG.png");
         ImageIcon BTBackPotion = new ImageIcon("BTBackPotion.png");
         
@@ -54,10 +54,10 @@ public class PotionGUI extends JFrame{
         pic.add(numS_hp);
         pic.add(numS_sp);
 
-        ImageIcon L_HP_potion = new ImageIcon("Lpotion.png");
-        ImageIcon S_HP_potion = new ImageIcon("Spotion.png");
-        ImageIcon L_SP_Potion = new ImageIcon("SPpotion.png");
-        ImageIcon S_SP_Potion = new ImageIcon("S_SPpotion.png");
+        ImageIcon L_HP_potion = new ImageIcon("berry1.png");
+        ImageIcon S_HP_potion = new ImageIcon("berry2.png");
+        ImageIcon L_SP_Potion = new ImageIcon("berry3.png");
+        ImageIcon S_SP_Potion = new ImageIcon("berry5.png");
         
 
         JLabel L_HP = new JLabel(L_HP_potion);

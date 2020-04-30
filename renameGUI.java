@@ -14,7 +14,7 @@ public class renameGUI extends JFrame{
         setVisible(true);
 
         Container c = getContentPane();
-        ImageIcon img = new ImageIcon("selectpoke.png");
+        ImageIcon img = new ImageIcon("selectbag.png");
         ImageIcon BTBackPotion = new ImageIcon("BTBackPotion.png");
         JLabel pic = new JLabel(img);
         c.add(pic);

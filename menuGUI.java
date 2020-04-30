@@ -13,7 +13,7 @@ public class menuGUI extends JFrame{
         setVisible(true);
         
         Container c = getContentPane();
-        ImageIcon img = new ImageIcon("menu.png");
+        ImageIcon img = new ImageIcon("Menu1.png");
         ImageIcon BTpokemonbag = new ImageIcon("BTpokemonbag.png");
         ImageIcon BTfindpokemon = new ImageIcon("BTfindpokemon.png");
         ImageIcon BTpotion = new ImageIcon("BTpotion.png");
